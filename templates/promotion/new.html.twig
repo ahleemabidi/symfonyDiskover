@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Promotion{% endblock %}
+
+{% block body %}
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    <h1>Create new Promotion</h1>
+
+    {{ include('promotion/_form.html.twig') }}
+
+    <a href="{{ path('app_promotion_index') }}">back to list</a>
+    
+    {{ form_errors(form.PrixApres)}}
+    {{ form_end(form) }}
+{% endblock %}
