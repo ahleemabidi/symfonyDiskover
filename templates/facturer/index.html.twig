@@ -1,0 +1,39 @@
+{% extends 'pricing.html.twig' %}
+
+{% block title %}Facturer index{% endblock %}
+
+{% block body %}
+    <h1>Facturer index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id_facture</th>
+                <th>DateFacture</th>
+                <th>Statut</th>
+                <th>Notes</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for facturer in facturers %}
+            <tr>
+                <td>{{ facturer.idFacture }}</td>
+                <td>{{ facturer.dateFacture }}</td>
+                <td>{{ facturer.statut }}</td>
+                <td>{{ facturer.notes }}</td>
+                <td>
+                    <a href="{{ path('app_facturer_show', {'id_facture': facturer.id_facture}) }}">show</a>
+                    <a href="{{ path('app_facturer_edit', {'id_facture': facturer.id_facture}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_facturer_new') }}">Create new</a>
+{% endblock %}

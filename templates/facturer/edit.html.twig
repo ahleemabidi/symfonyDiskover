@@ -1,0 +1,13 @@
+{% extends 'pricing.html.twig' %}
+
+{% block title %}Edit Facturer{% endblock %}
+
+{% block body %}
+    <h1>Edit Facturer</h1>
+
+    {{ include('facturer/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_facturer_index') }}">back to list</a>
+
+    {{ include('facturer/_delete_form.html.twig') }}
+{% endblock %}

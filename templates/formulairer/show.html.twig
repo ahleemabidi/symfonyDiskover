@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulairer{% endblock %}
+
+{% block body %}
+    <h1>Formulairer</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ formulairer.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ formulairer.nom }}</td>
+            </tr>
+            <tr>
+                <th>Tlp</th>
+                <td>{{ formulairer.tlp }}</td>
+            </tr>
+            <tr>
+                <th>Mail</th>
+                <td>{{ formulairer.mail }}</td>
+            </tr>
+            <tr>
+                <th>Nbr</th>
+                <td>{{ formulairer.nbr }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ formulairer.type }}</td>
+            </tr>
+            <tr>
+                <th>Categ</th>
+                <td>{{ formulairer.categ }}</td>
+            </tr>
+            <tr>
+                <th>Depart</th>
+                <td>{{ formulairer.depart }}</td>
+            </tr>
+            <tr>
+                <th>Destination</th>
+                <td>{{ formulairer.destination }}</td>
+            </tr>
+            <tr>
+                <th>Opt</th>
+                <td>{{ formulairer.opt }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_formulairer_index') }}">back to list</a>
+
+    <a href="{{ path('app_formulairer_edit', {'id': formulairer.id}) }}">edit</a>
+
+    {{ include('formulairer/_delete_form.html.twig') }}
+{% endblock %}

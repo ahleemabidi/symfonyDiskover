@@ -1,0 +1,11 @@
+{% extends 'pricing.html.twig' %}
+
+{% block title %}New Formulairer{% endblock %}
+
+{% block body %}
+    <h1>Create new Formulairer</h1>
+
+    {{ include('formulairer/_form.html.twig') }}
+
+    <a href="{{ path('app_formulairer_index') }}">back to list</a>
+{% endblock %}
