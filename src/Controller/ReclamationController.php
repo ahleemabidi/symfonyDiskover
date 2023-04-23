@@ -113,5 +113,15 @@ class ReclamationController extends AbstractController
             'form' => $form -> createView (),
         ]);
   }
+  #[Route('/searchReclamationByCin', name: 'searchReclamationByCin')]
+public function searchReclamationByCin(Request $request, NormalizerInterface $normalizer, ReclamationRepository $rr)
+{
+    $requestString = $request->get('searchValue');
+    $reclamations = $rr->findReclamationByCin($requestString);
+    $jsonContent = $normalizer->normalize($reclamations, 'json', ['groups' => 'reclamations']);
+    $retour = json_encode($jsonContent);
+    return new Response($retour);
+}
+
 
 }

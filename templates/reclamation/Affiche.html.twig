@@ -202,6 +202,42 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="../../Front/js/google-map.js"></script>
   <script src="../../Front/js/main.js"></script>
-    
+    <div class="container">
+  <h1>Reclamations</h1>
+  <form>
+    <div class="form-group">
+      <input type="text" class="form-control" id="searchInput" placeholder="Rechercher...">
+    </div>
+  </form>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>CIN</th>
+        <th>Type</th>
+        <th>Objet</th>
+        <th>Message</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
+      {% if reclamations is empty %}
+        <tr>
+          <td colspan="5">Aucune réclamation trouvée</td>
+        </tr>
+      {% else %}
+        {% for reclamation in reclamations %}
+          <tr>
+            <td>{{ reclamation.cin }}</td>
+            <td>{{ reclamation.type }}</td>
+            <td>{{ reclamation.objet }}</td>
+            <td>{{ reclamation.message }}</td>
+            <td>{{ reclamation.date|date('d/m/Y') }}</td>
+          </tr>
+        {% endfor %}
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+
   </body>
 </html>

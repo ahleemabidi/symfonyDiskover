@@ -46,6 +46,18 @@ class ReclamationRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+    /**
+ * @throws ORMException
+ * @throws OptimisticLockException
+ */
+public function findReclamationByCin($cin){
+    return $this->createQueryBuilder('student')
+        ->where('student.cin LIKE :cin')
+        ->setParameter('cin', '%'.$cin.'%')
+        ->getQuery()
+        ->getResult();
+}
+
 
     // /**
     //  * @return Reclamation[] Returns an array of Reclamation objects
