@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Colaborationevent{% endblock %}
+
+{% block body %}
+    <h1>Edit Colaborationevent</h1>
+
+    {{ include('colaborationevent/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_colaborationevent_index') }}">back to list</a>
+
+    {{ include('colaborationevent/_delete_form.html.twig') }}
+{% endblock %}

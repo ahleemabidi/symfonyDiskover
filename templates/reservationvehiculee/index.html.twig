@@ -1,0 +1,57 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %} Liste Reservation{% endblock %}
+
+{% block body %}
+    <h1>Liste Reservation</h1>
+
+        <style>
+            table {
+                    margin-top: 60px;
+                    }
+        </style>
+        <style>
+            th {
+                background-color: #eee;
+                color: #333;
+                }
+        </style>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id_res</th>
+                <th>Nom Client</th>
+                <th>Nbr Personnes</th>
+                <th>Nom Event</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservationvehiculee in reservationvehiculees %}
+            <tr>
+                <td>{{ reservationvehiculee.idreservationv }}</td>
+                <td>{{ reservationvehiculee.nomclient }}</td>
+                <td>{{ reservationvehiculee.nbrclient }}</td>
+                <td>{{ reservationvehiculee.nomevent }}</td>
+                <td>
+                    <a href="{{ path('app_reservationvehiculee_show', {'idreservationv': reservationvehiculee.idreservationv}) }}">Show</a>
+                    <a href="{{ path('app_reservationvehiculee_edit', {'idreservationv': reservationvehiculee.idreservationv}) }}">Edit</a>
+                    <a href="{{ path('app_mailling', {'idreservationv': reservationvehiculee.idreservationv}) }}">Mailling</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="{{ path('app_reservationvehiculee_new') }}"class="btn btn-secondary py-2 ml-1">Create New</a>
+        <a href="{{ path('app_mailling') }}"class="btn btn-secondary py-2 ml-1">Mailling</a>
+
+    <br><br>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %} Liste Event{% endblock %}
+
+
+{% block body %}
+<div style="display: flex; justify-content: space-between;">
+    <h1>Listes Event</h1>
+        <a href="{{ path('app_colaborationevent_addevent') }}"class="btn btn-primary"style="background-color: #DA2D25;border-color: #DA2D25;"><i class="fas fa-plus">  </i> Ajouter</a>
+</div>
+
+    <table class="table">
+        <thead>
+            <tr>
+            <th>NomEvent</th>
+            <th>DateEvent</th>
+            <th>AdresseEvent</th>
+            <th>NbPlaceEvent</th>
+            <th>PrixEvent</th>
+            <th>Supprimer/Modifier</th>
+                
+                
+            </tr>
+        </thead>
+        <tbody>
+
+      {% for colab in c %}
+            <tr>
+                <th>{{colab.NomEvent}}</<th>
+                <th>{{colab.DateEvent.format('d/m/Y')}}</<th>
+                <th>{{colab.AdresseEvent}}</<th>
+                <th>{{colab.getNbrPlaceVehicule}}</<th>
+                <th>{{colab.getPrixVehiculeEvent}}</<th>
+            
+                <td>
+                    <a href="{{ path('supp_colab', {'idevent': colab.idevent}) }}" class="btn btn-primary"style="background-color: #3330FF;border-color: #3330FF;"><i class="far fa-eye"></i></a>
+                    <a href="{{ path('modifevent', {'idevent': colab.idevent}) }}"class="btn btn-primary"style="background-color: #19B151;border-color: #19B151;"><i class="fas fa-pencil-alt"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+

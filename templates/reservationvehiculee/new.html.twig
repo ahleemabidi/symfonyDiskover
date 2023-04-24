@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Reservationvehiculee{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        .reservation-form {
+            padding: 50px;
+        }
+        .reservation-form h2 {
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+        }
+        input[type="text"],
+        input[type="number"] {
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .btn-secondary {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        .btn-secondary:hover {
+            background-color: #0069d9;
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="reservation-form">
+        <h1>Create new Reservationvehiculee</h1>
+
+        {{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+
+        <section>
+            <div class="row">
+                <div class="col-md-4">
+                    <h2>Reservation </h2>
+                    <div class="form-group">
+                        {{ form_label(form.nomclient,"Nom Client") }}
+                        {{ form_widget(form.nomclient, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.nomclient) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.nbrclient,"Nombre personnes") }}
+                        {{ form_widget(form.nbrclient, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.nbrclient) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.nomevent,"Note") }}
+                        {{ form_widget(form.nomevent, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.nomevent) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.idevent,"Nom Event") }}
+                        {{ form_widget(form.idevent, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.idevent) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_widget(form.Sent_Request, {'attr': {'class': 'btn btn-secondary'}}) }}
+						 <a href="{{ path('app_colaborationevent_index') }}"class="btn btn-secondary">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {{ form_end(form) }}
+
+        
+    </div>
+{% endblock %}
