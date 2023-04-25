@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+
+    <h1>User index</h1>
+    <input type="text" id="search" class="form-control" placeholder="Search">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                
+                <th>Password</th>
+                
+                <th>actions</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+        
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                
+                <td>{{ user.password }}</td>
+              
+                
+                <td>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-primary"style="background-color: #3330FF;border-color: #3330FF;"><i class="far fa-eye"></i></a>
+                    
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}"class="btn btn-primary"style="background-color: #19B151;border-color: #19B151;"><i class="fas fa-pencil-alt"></i></a>
+                 
+                            
+               
+               </td>
+             
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {{ knp_pagination_render(users) }}
+          <a href="{{ path('app_user_new') }}"class="btn btn-primary"style="background-color: #DA2D25;border-color: #DA2D25;"><i class="fas fa-plus"></i>ajouter</a>
+      
+ <a href="{{ path('user_list') }}"class="btn btn-primary"style="background-color: #DA2D25;border-color: #DA2D25;"><i class="fas fa-plus"></i>imprimer</a>
+
+<a href="{{ path('app_user_index', {sort: sort == 'asc' ? 'desc' : 'asc'}) }}" class="btn btn-primary"style="background-color: #DA2D25;border-color: #DA2D25;">
+                                <i class="bi bi-sort-alpha-{{ sort == 'asc' ? 'down' : 'up' }}"></i> Trier par nom
+                            </a>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("table tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+    
+{% endblock %}
