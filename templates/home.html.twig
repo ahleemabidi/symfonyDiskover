@@ -25,13 +25,14 @@
     <link rel="stylesheet" href="{{asset('css/flaticon.css')}}">
     <link rel="stylesheet" href="{{asset('css/icomoon.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+
     {%endblock%}
   </head>
   <body>
     
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">Disk<span>over</span></a>
+	      <a class="navbar-brand" href="index.html">Car<span>Book</span></a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -41,45 +42,34 @@
 	          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-	        <li class="nav-item"><a href="" class="nav-link">Pricing</a></li>
-              <li class="nav-item"><a href="" class="nav-link">Pricing</a></li>
-              
-              <li class="nav-item"><a href=" class="nav-link">Pricing</a></li>
-              <li class="nav-item"><a href="" class="nav-link">Pricing</a></li>
-              
-            
+	          <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
 	          <li class="nav-item"><a href="car.html" class="nav-link">Cars</a></li>
-	          <li class="nav-item"><a href="blog.html" class="nav-link">Contact</a></li>
-	          <li class="nav-item"><a href="contact.html" class="nav-link">Sign in</a></li>
+	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 	        </ul>
 	      </div>
 	    </div>
 	  </nav>
     <!-- END nav -->
     
+    {% block body%}
+
     <div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
           <div class="col-lg-8 ftco-animate">
           	<div class="text w-100 text-center mb-md-5 pb-md-5">
-	            <h1 class="mb-4">Welcome to Diskover</h1>
-	            <p style="font-size: 18px;">Découvrez Diskover, une plateforme qui met en relation les conducteurs en déplacement avec ceux qui cherchent à se déplacer en utilisant leurs services.</p>
-	           {# <a href="{{asset('video.mp4')}}" class="icon-wrap popup-vimeo d-flex align-items-center mt-4 justify-content-center">#}
-             <button id="btn-video" class="btn btn-primary"><span class="ion-ios-play"></span></button>
-             <div id="video-container" class="d-none">
-             <video width="640" height="360" controls>
-  <source src="{{ asset('videos/video.mp4') }}" type="video/mp4">
-  Votre navigateur ne supporte pas la lecture de vidéos.
-</video>
-</div>
-	            	{# <div class="icon d-flex align-items-center justify-content-center">
+	            <h1 class="mb-4">Fast &amp; Easy Way To Rent A Car</h1>
+	            <p style="font-size: 18px;">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts</p>
+	            <a href="https://vimeo.com/45830194" class="icon-wrap popup-vimeo d-flex align-items-center mt-4 justify-content-center">
+	            	<div class="icon d-flex align-items-center justify-content-center">
 	            		<span class="ion-ios-play"></span>
-	            	</div> #}
-	            	<div class="heading-title ml-5">
-		            	<span>Easy steps for Booking a car</span>
 	            	</div>
-	            
+	            	<div class="heading-title ml-5">
+		            	<span>Easy steps for renting a car</span>
+	            	</div>
+	            </a>
             </div>
           </div>
         </div>
@@ -92,9 +82,26 @@
     			<div class="col-md-12	featured-top">
     				<div class="row no-gutters">
 	  					<div class="col-md-4 d-flex align-items-center">
-	  						
-                            {% block form %}
-                            {% endblock %}
+	  						<form action="#" class="request-form ftco-animate bg-primary">
+
+
+		          		<h2>Passer votre réservation</h2>
+                          <div class="row">
+                            <div class="col-md-6">
+                                {{ form_start(form) }}
+                                    {{ form_row(form.nom) }}
+                                    {{ form_row(form.tlp) }}
+                                    {{ form_row(form.mail) }}
+                                    {{ formulairer.nbr }}
+                                    {{ formulairer.type }}
+                              {{ formulairer.categ }}
+                                {{ formulairer.depart }}
+                                {{ formulairer.destination }}
+                             {{ formulairer.opt }}
+                                    <button type="submit" class="btn btn-primary">Send</button>
+                                {{ form_end(form) }}
+			          
+			    			</form>
 	  					</div>
 	  					<div class="col-md-8 d-flex align-items-center">
 	  						<div class="services-wrap rounded-right w-100">
@@ -104,7 +111,7 @@
 					            <div class="services w-100 text-center">
 				              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
 				              	<div class="text w-100">
-					                <h3 class="heading mb-2">Choisissez votre destination</h3>
+					                <h3 class="heading mb-2">Choose Your Pickup Location</h3>
 				                </div>
 					            </div>      
 					          </div>
@@ -112,7 +119,7 @@
 					            <div class="services w-100 text-center">
 				              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-handshake"></span></div>
 				              	<div class="text w-100">
-					                <h3 class="heading mb-2">Sélectionnez la meilleure offre</h3>
+					                <h3 class="heading mb-2">Select the Best Deal</h3>
 					              </div>
 					            </div>      
 					          </div>
@@ -120,7 +127,7 @@
 					            <div class="services w-100 text-center">
 				              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-rent"></span></div>
 				              	<div class="text w-100">
-					                <h3 class="heading mb-2">Réservez la véhicule de votre choix</h3>
+					                <h3 class="heading mb-2">Reserve Your Rental Car</h3>
 					              </div>
 					            </div>      
 					          </div>
@@ -210,15 +217,15 @@
     <section class="ftco-section ftco-about">
 			<div class="container">
 				<div class="row no-gutters">
-					<div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/aboutV.jpg);">
+					<div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/about.jpg);">
 					</div>
 					<div class="col-md-6 wrap-about ftco-animate">
 	          <div class="heading-section heading-section-white pl-md-5">
 	          	<span class="subheading">About us</span>
-	            <h2 class="mb-4">Welcome to Diskover</h2>
+	            <h2 class="mb-4">Welcome to Carbook</h2>
 
-	            <p>Découvrez Disk'over, la solution de gestion de transport en temps réel qui relie les conducteurs en déplacement avec les passagers en quête d'un moyen de transport sûr et rapide.</p>
-	            <p>Grâce à notre application Desktop, notre site web et notre application mobile, chaque utilisateur peut trouver rapidement et facilement une offre de transport adaptée à ses besoins. Avec Disk'over, réserver un moyen de transport en temps réel est facile et pratique. Indiquez simplement votre destination, le nombre de passagers et choisissez la catégorie de transport que vous préférez. Vous serez informé du prix correspondant et pourrez accepter ou refuser la proposition en un seul clic.</p>
+	            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+	            <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
 	            <p><a href="#" class="btn btn-primary py-3 px-4">Search Vehicle</a></p>
 	          </div>
 					</div>
@@ -239,8 +246,8 @@
 						<div class="services services-2 w-100 text-center">
             	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-wedding-car"></span></div>
             	<div class="text w-100">
-                <h3 class="heading mb-2">Evenements</h3>
-                <p>Immergez-vous dans la culture locale en participant aux événements les plus passionnants de la ville.</p>
+                <h3 class="heading mb-2">Wedding Ceremony</h3>
+                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
               </div>
             </div>
 					</div>
@@ -248,8 +255,8 @@
 						<div class="services services-2 w-100 text-center">
             	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-transportation"></span></div>
             	<div class="text w-100">
-                <h3 class="heading mb-2">Intra-Urbain</h3>
-                <p>Profitez d'un transport sans tracas avec notre service de transfert en ville fiable..</p>
+                <h3 class="heading mb-2">City Transfer</h3>
+                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
               </div>
             </div>
 					</div>
@@ -257,8 +264,8 @@
 						<div class="services services-2 w-100 text-center">
             	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-car"></span></div>
             	<div class="text w-100">
-                <h3 class="heading mb-2">Airport</h3>
-                <p>Commencez votre voyage du bon pied avec notre service de transfert aéroport. Nous vous rencontrerons à l'aéroport et vous conduirons directement à votre hôtel, afin que vous puissiez vous détendre et profiter de votre voyage.</p>
+                <h3 class="heading mb-2">Airport Transfer</h3>
+                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
               </div>
             </div>
 					</div>
@@ -266,8 +273,8 @@
 						<div class="services services-2 w-100 text-center">
             	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-transportation"></span></div>
             	<div class="text w-100">
-                <h3 class="heading mb-2">Inter-Urbain</h3>
-                <p>Découvrez le meilleur que notre ville a à offrir avec notre visite de la ville complète.</p>
+                <h3 class="heading mb-2">Whole City Tour</h3>
+                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
               </div>
             </div>
 					</div>
@@ -457,15 +464,15 @@
         </div>
     	</div>
     </section>	
+    {% endblock %}
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2"><a href="#" class="logo">Disk<span>over</span></a></h2>
-              <p> une formidable opportunité de nouveaux services pour 
-des déplacements urbains rapides, sûrs et faciles.</p>
+              <h2 class="ftco-heading-2"><a href="#" class="logo">Car<span>book</span></a></h2>
+              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -502,9 +509,9 @@ des déplacements urbains rapides, sûrs et faciles.</p>
             	<h2 class="ftco-heading-2">Have a Questions?</h2>
             	<div class="block-23 mb-3">
 	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">Tunisia</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+216 71 200 200</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@Diskover.com</span></a></li>
+	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
 	              </ul>
 	            </div>
             </div>
@@ -526,7 +533,7 @@ des déplacements urbains rapides, sûrs et faciles.</p>
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
- {% block js%}
+{% block js%}
   <script src="{{asset('js/jquery.min.js')}}"></script>
   <script src="{{asset('js/jquery-migrate-3.0.1.min.js')}}"></script>
   <script src="{{asset('js/popper.min.js')}}"></script>
@@ -544,8 +551,6 @@ des déplacements urbains rapides, sûrs et faciles.</p>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="{{asset('js/google-map.js')}}"></script>
   <script src="{{asset('js/main.js')}}"></script>
-  <script src="https://js.stripe.com/v3/"></script>
-
-      {%endblock%}
+  {%endblock%} 
   </body>
 </html>

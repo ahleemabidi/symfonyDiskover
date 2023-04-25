@@ -4,6 +4,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\FormulairerRepository;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups ;
+
 
 #[ORM\Entity(repositoryClass: FormulairerRepository::class)]
 
@@ -15,34 +18,56 @@ class Formulairer
 #[ORM\Id]
 #[ORM\GeneratedValue]
 #[ORM\Column]
+#[Groups(['posts:read'])]
+
     private ?int $id;
 
 #[ORM\Column(length : 255)]
+#[Groups(['posts:read'])]
+
     private ?string $nom;
 
-    
-#[ORM\Column]
+   
+    #[ORM\Column]
+    #[Groups(['posts:read'])]
+
     private ?int $tlp;
 
-#[ORM\Column(length : 255)]
+    #[ORM\Column(length : 255)]
+    #[Groups(['posts:read'])]
+
     private ?string  $mail;
+    
 
 #[ORM\Column]
+#[Groups(['posts:read'])]
+
     private ?int $nbr;
 
 #[ORM\Column(length : 255)]
-    private ?string $type;
+#[Groups(['posts:read'])]
+ private ?string $type;
+
+
 
 #[ORM\Column(length : 255)]
-    private ?string $categ;
+#[Groups(['posts:read'])]
+
+    private ?string $categ ;
 
 #[ORM\Column(length : 255)]
+#[Groups(['posts:read'])]
+
     private ?string $depart;
 
 #[ORM\Column(length : 255)]
+#[Groups(['posts:read'])]
+
     private ?string $destination;
 
 #[ORM\Column(length : 255)]
+#[Groups(['posts:read'])]
+
     private ?string $opt;
 
 public function getId(): ?int

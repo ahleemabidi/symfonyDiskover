@@ -1,0 +1,38 @@
+{% extends 'front.html.twig' %}
+
+{% block body %}
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+  <button id="customButton">Payer</button>
+  <script>
+    var handler = StripeCheckout.configure({
+      key: '{{ app.parameter("pk_test_51Mdev4BkXviPD7IqVPtweY9EqVAC1XvYfXyX7Vse7j1RRcR2PViyznjRduq30N6W7pHLHnB5u7q6pav2wj5FmxCK003NFnwKUc") }}',
+      locale: 'auto',
+      token: function(token) {
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '{{ path('app_stripe') }}';
+        var hiddenInput = document.createElement('input');
+        hiddenInput.setAttribute('type', 'hidden');
+        hiddenInput.setAttribute('name', 'stripeToken');
+        hiddenInput.setAttribute('value', token.id);
+        form.appendChild(hiddenInput);
+        document.body.appendChild(form);
+        form.submit();
+      }
+    });
+    
+    document.getElementById('customButton').addEventListener('click', function(e) {
+      handler.open({
+        name: 'Nom de votre entreprise',
+        description: 'Description de votre produit',
+        amount: 500,
+      });
+      e.preventDefault();
+    });
+    
+    // Fermer le formulaire de paiement Stripe lorsqu'il est terminé
+    window.addEventListener('popstate', function() {
+      handler.close();
+    });
+  </script>
+{% endblock %}

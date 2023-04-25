@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 class FormulairerType extends AbstractType
 {
@@ -18,12 +20,36 @@ class FormulairerType extends AbstractType
             ->add('mail')
             ->add('nbr')
             ->add('type')
-            ->add('categ')
+
+
+
+
+            ->add('categ', ChoiceType::class, array(
+                'choices' => array(
+                    'moyenne gamme' => 'moyenne gamme',
+                    'haute gamme' => 'haute gamme',
+                   
+
+                )
+            ))
+
+
+
+
+
+
+
+
+
             ->add('depart')
             ->add('destination')
             ->add('opt')
-            ->add('ajouter',SubmitType::class)
-            ->add('update',SubmitType::class)
+            ->add('save',SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary',
+                ]
+            ])
+            
         ;
     }
 

@@ -15,6 +15,8 @@ class FacturerType extends AbstractType
             ->add('dateFacture')
             ->add('statut')
             ->add('notes')
+            ->add('ajouter',SubmitType::class)
+            
         ;
     }
 

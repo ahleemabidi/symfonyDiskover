@@ -1,0 +1,55 @@
+{% extends 'front.html.twig' %}
+<form id="form-recherche">
+    <input type="text" id="cin" name="cin">
+    <button type="button" id="recherche-btn">Rechercher</button>
+</form>
+$(document).ready(function() {
+    $('#recherche-btn').click(function() {
+        var type = $('#type').val();
+        $.ajax({
+            url: '{{ path('rechercheAjax') }}',
+            type: 'GET',
+            data: { type: type },
+            success: function(data) {
+                $('#resultats-recherche').html(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    });
+});
+
+<form id="searchForm">
+    <input type="text" id="searchValue" name="searchValue" placeholder="Search...">
+    <button type="submit">Search</button>
+</form>
+
+<div id="searchResults"></div>
+
+$(document).ready(function() {
+    $('#searchForm').submit(function(event) {
+        event.preventDefault();
+        var searchValue = $('#searchValue').val();
+
+        $.ajax({
+            url: '/searchForm',
+            type: 'GET',
+            data: { searchValue: searchValue },
+            dataType: 'json',
+            success: function(response) {
+                var resultsHtml = '';
+                for (var i = 0; i < response.length; i++) {
+                    var formulaire = response[i];
+                    resultsHtml += '<div>' + formulaire.id + ' - ' + formulaire.title + '</div>';
+                }
+                $('#searchResults').html(resultsHtml);
+            },
+            error: function() {
+                $('#searchResults').html('An error occurred while searching.');
+            }
+        });
+    });
+});
+
+

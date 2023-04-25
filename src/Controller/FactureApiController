@@ -9,17 +9,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use MercurySeries\FlashyBundle\FlashyNotifier;
 
 #[Route('/facturer')]
-class FacturerController extends AbstractController
+class FactureApiController extends AbstractController
 {
     #[Route('/', name: 'app_facturer_index', methods: ['GET'])]
-    public function index(FacturerRepository $facturerRepository,FlashyNotifier $flashy): Response
+    public function index(FacturerRepository $facturerRepository): Response
     {
-        $flashy->success('Liste des factures!', 'http://your-awesome-link.com');
-
         return $this->render('facturer/index.html.twig', [
             'facturers' => $facturerRepository->findAll(),
         ]);
@@ -79,46 +75,4 @@ class FacturerController extends AbstractController
 
         return $this->redirectToRoute('app_facturer_index', [], Response::HTTP_SEE_OTHER);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * @Route("/r/search_user", name="app_facturer_search_user", methods={"GET"})
-     */
-
-     public function search_usere(Request $request,NormalizerInterface $Normalizer,FacturerRepository $hrp ): Response
-     {
- 
-         $requestString=$request->get('searchValue');
-         $requestString3=$request->get('orderid');
-         $user = $hrp->findUser($requestString,$requestString3);
-         $jsoncontentc =$Normalizer->normalize($user,'json',['groups'=>'posts:read']); //jeson format
-         $jsonc=json_encode($jsoncontentc);
-         if(  $jsonc == "[]" ) { return new Response(null); }
-         else{ return new Response($jsonc); }
- 
-     }
-
-
-
-
-
-
-
-
-
-
-
-
 }

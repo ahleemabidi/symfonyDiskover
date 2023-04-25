@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'pricing.html.twig' %}
 
 {% block title %}Facturer{% endblock %}
 
@@ -13,7 +13,7 @@
             </tr>
             <tr>
                 <th>DateFacture</th>
-                <td>{{ facturer.dateFacture }}</td>
+                <td>{{ facturer.dateFacture ? facturer.dateFacture|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
                 <th>Statut</th>

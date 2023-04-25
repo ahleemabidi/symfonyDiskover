@@ -39,6 +39,40 @@ class FacturerRepository extends ServiceEntityRepository
         }
     }
 
+
+
+
+    
+    public function findUser($valueemail,$order){
+        $em = $this->getEntityManager();
+        if($order=='DESC') {
+            $query = $em->createQuery(
+                'SELECT r FROM App\Entity\Facturer r   where r.statut like :statutt order by r.id_facture DESC '
+            );
+            $query->setParameter('statutt', $valueemail . '%');
+        }
+        else{
+            $query = $em->createQuery(
+                'SELECT r FROM App\Entity\Facturer r   where r.statut like :statutt  order by r.id_facture ASC '
+            );
+            $query->setParameter('statutt', $valueemail . '%');
+        }
+        return $query->getResult();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //    /**
 //     * @return Facturer[] Returns an array of Facturer objects
 //     */

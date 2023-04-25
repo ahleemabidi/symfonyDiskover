@@ -38,4 +38,85 @@ class FormulairerRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function findformulairerbyType($type){
+        return $this ->createQueryBuilder('formulairer')
+          ->where('formualirer.type LIKE :type')
+          ->setParameter('type', '%'.$type.'%')
+          ->getQuery()
+          ->getResult();
+    }
+
+    
+
+    public function search($searchTerm)
+    {
+        $qb = $this->createQueryBuilder('f')
+            ->where('form.type LIKE :searchTerm')
+            ->setParameter('searchTerm', '%'.$searchTerm.'%');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findAllSortedByName($sort = 'asc')
+    {
+        $queryBuilder = $this->createQueryBuilder('e')
+            ->orderBy('e.type', $sort);
+    
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function findEntitiesByString($str){
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT p
+                FROM AppBundle:Post p
+                WHERE p.title LIKE :str'
+            )
+            ->setParameter('str', '%'.$str.'%')
+            ->getResult();
+    }
+
+
+
+
+
+
+
+    public function find_Nb_hotel_Par_Etat($categ){
+
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT DISTINCT  count(h.id) FROM   App\Entity\Formulairer h  where h.categ = :categ   '
+        );
+        $query->setParameter('categ', $categ);
+        return $query->getResult();
+    }
+
+
+
+
+
+
+
+    
+    public function findUser($valueemail,$order){
+        $em = $this->getEntityManager();
+        if($order=='DESC') {
+            $query = $em->createQuery(
+                'SELECT r FROM App\Entity\Formulairer r   where r.nom like :nomm order by r.id DESC '
+            );
+            $query->setParameter('nomm', $valueemail . '%');
+        }
+        else{
+            $query = $em->createQuery(
+                'SELECT r FROM App\Entity\Formulairer r   where r.nom like :nomm  order by r.id ASC '
+            );
+            $query->setParameter('nomm', $valueemail . '%');
+        }
+        return $query->getResult();
+    }
+
+
 }

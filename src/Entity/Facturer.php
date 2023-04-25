@@ -7,6 +7,7 @@ use App\Repository\FacturerRepository;
 use DateTime;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\length;
+use Symfony\Component\Serializer\Annotation\Groups ;
 
 #[ORM\Entity(repositoryClass: FacturerRepository::class)]
 class Facturer
@@ -15,15 +16,19 @@ class Facturer
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(name: "id_facture")]
+    #[Groups(['posts:read'])]
         private ?int $id_facture;
 
     #[ORM\Column]
+    #[Groups(['posts:read'])]
     private ?DateTime $dateFacture;
 
     #[ORM\Column(length : 255)]
+    #[Groups(['posts:read'])]
     private ?string $statut;
 
     #[ORM\Column(length : 255)]
+    #[Groups(['posts:read'])]
     private ?string $notes;
 
     
