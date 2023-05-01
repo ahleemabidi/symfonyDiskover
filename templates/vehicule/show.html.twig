@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vehicule{% endblock %}
+
+{% block body %}
+    <h1>Vehicule</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ vehicule.id }}</td>
+            </tr>
+            <tr>
+                <th>Disponibilite</th>
+                <td>{{ vehicule.disponibilite }}</td>
+            </tr>
+            <tr>
+                <th>NumEntretien</th>
+                <td>{{ vehicule.numEntretien }}</td>
+            </tr>
+            <tr>
+                <th>DateEntretien</th>
+                <td>{{ vehicule.dateEntretien|date('d-m-Y') }}</td>
+            </tr>
+            <tr>
+                <th>ResEntretien</th>
+                <td>{{ vehicule.resEntretien }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_vehicule_index') }}"class="btn btn-primary btn-custom " style="width:200px;  white-space: nowrap; "><i class="fas fa-arrow-left"></i>    Liste des Véhicules</a>
+        <a href="{{ path('app_home_admin') }}"class="btn btn-primary btn-custom" style="width:200px;  white-space: nowrap; float: right; "><i class="fas fa-arrow-right"></i> Dashboard</a>
+
+   {# <a href="{{ path('app_vehicule_edit', {'id': vehicule.id}) }}">edit</a>
+
+    {{ include('vehicule/_delete_form.html.twig') }} #}
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vehicule index{% endblock %}
+
+{% block body %}
+<div style="display: flex; justify-content: space-between;">
+    <h1>Liste des Vehicules</h1>
+ <a href="{{ path('app_vehicule_new') }}" class="btn btn-primary btn-custom" style="background-color: #BB0B0B;border-color: #BB0B0B;width: 80px;"><i class="fas fa-plus"></i>  Ajout</a>
+</div>
+        <input type="text" id="search" class="form-control" placeholder="Search">
+
+    <table  id="t" class="table" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Disponibilite</th>
+                <th>NumEntretien</th>
+                <th>DateEntretien</th>
+                <th>ResEntretien</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody id="all">
+        {% for vehicule in vehicules %}
+            <tr>
+                <td>{{ vehicule.id }}</td>
+                <td>{{ vehicule.disponibilite }}</td>
+                <td>{{ vehicule.numEntretien }}</td>
+                <td>{{ vehicule.dateEntretien|date('d-m-Y') }}</td>
+                <td>{{ vehicule.resEntretien }}</td>
+                <td>
+                    <a href="{{ path('app_vehicule_show', {'id': vehicule.id}) }}" class="btn btn-primary"><i class="far fa-eye"></i></a>
+                    <a href="{{ path('app_vehicule_edit', {'id': vehicule.id}) }}" class="btn btn-primary" style="background-color: #FF8C00;border-color: #FF8C00;"><i class="fas fa-pencil-alt"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+          <tbody id="searchtab">
+        </tbody>
+    </table>
+{% do vehicules.setPageRange(2) %}
+    {{ knp_pagination_render(vehicules, 'pagination.html.twig')}}
+
+{% endblock %}
+{% block js %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+$(document).ready(function() {
+    $("#search").keyup(function(e) {
+        var value = $(this).val();
+        $.ajax({
+            url: "{{ path('searchDispo') }}",
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                'searchValue': value
+            },
+            success: function(response) {
+                if (Array.isArray(response)) {
+                    $('#t tbody#searchtab').empty();
+                    if (response.length > 0) {
+                        $('#t tbody#all').hide();
+                        var rows = $.map(response, function(item) {
+                            return '<tr><td>' + item.id + '</td><td>' + item.disponibilite + '</td><td>' + item.numEntretien + '</td><td>' + item.dateEntretien + '</td><td>' + item.resEntretien + '</td><td><a href="/' + item.id + '/edit">modifier</a> </br><a href="/' + item.id + '">supprimer</a></td></tr>';
+                        });
+                        $('#t tbody#searchtab').append(rows.join(''));
+                        $('#t tbody#searchtab').fadeIn('fast');
+                    } else {
+                        $('#t tbody#all').show();
+                    }
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    });
+});
+</script>
+{% endblock %}
+

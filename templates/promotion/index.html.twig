@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Promotion {% endblock %}
+
+{% block body %}
+
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Load Flashy default JavaScript -->
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    <!-- Include Flashy default partial -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#rech tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+
+<div style="display: flex; justify-content: space-between;">
+    <h1>Promotion</h1><br><br>
+
+
+
+</div>
+    <input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>NomP</th>
+                <th>DureeP</th>
+                <th>PrixAvant</th>
+                <th>PrixApres</th>
+                <th>Pourcentage</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody id="rech">
+
+       {% for promotion in promotions %}
+            <tr>
+                <td>{{ promotion.nomP }}</td>
+                <td>{{ promotion.DureeP }}</td>
+                <td>{{ promotion.PrixAvant }}</td>
+                <td>{{ promotion.PrixApres }}</td>
+                <td>{{ promotion.Pourcentage }}</td>
+                <td>
+                    <a href="{{ path('app_promotion_show', {'id': promotion.id}) }}" class="btn btn-primary"style="background-color: #3330FF;border-color: #3330FF;"><i class="far fa-eye"></i></a>
+                    <a href="{{ path('app_promotion_edit', {'id': promotion.id}) }}"class="btn btn-primary"style="background-color: #19B151;border-color: #19B151;"><i class="fas fa-pencil-alt"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div style="position: fixed; bottom: 10px; width: 100%; !important;">
+    {# {% set flashyOptions = { 'position': 'bottom', 'important': true } %}
+    {{ include('@MercurySeriesFlashy/flashy.html.twig', flashyOptions) }} #}
+    </div>
+{% endblock %}

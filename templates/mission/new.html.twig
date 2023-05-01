@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Mission{% endblock %}
+
+{% block body %}
+<div class="container">
+        <div class="row">
+         <h1 class="text-center">Ajouter une Mission</h1>
+            <div class="col-md-4 mx-auto">
+     {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+        {{ form_row(form.matricule,{ 'attr': {'class': 'form-control'} }) }}
+        {{ form_row(form.description,{ 'attr': {'class': 'form-control'} }) }}
+        {{ form_row(form.heureDebut,{ 'attr': {'class': 'form-control'} }) }}
+        {{ form_row(form.heureFin,{ 'attr': {'class': 'form-control'} }) }}
+        <br>
+                <div class="mx-auto col-md-2">
+        {{ form_rest(form,{ 'attr': {'class': 'btn btn-primary'} })}} {# Ajout de cette ligne pour afficher le reste des champs du formulaire #}
+      
+       </div>
+     {{ form_end(form) }}
+
+   
+ </div>
+ 
+        </div>
+         <div class="col-md-4 offset-md-10 text-right ">
+  {#  {{ include('mission/_form.html.twig') }} #}
+
+    <a href="{{ path('app_mission_index') }}" class="btn btn-primary"><i class="far fa-eye"></i>     Show Missions</a>
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie{% endblock %}
+
+{% block body %}
+    <h1>Categorie</h1>
+
+    <table class="table">
+        <tbody>
+             <tr>
+                <th>Id</th>
+                <td>{{ categorie.idCategorie }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ categorie.type }}</td>
+            </tr>
+            <tr>
+                <th>Matricule</th>
+                <td>{{ categorie.matricule }}</td>
+            </tr>
+            <tr>
+                <th>Marque</th>
+                <td>{{ categorie.marque }}</td>
+            </tr>
+           
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categorie_index') }}"class="btn btn-primary btn-custom " style="width:200px;  white-space: nowrap; "><i class="fas fa-arrow-left"></i> Liste des Categories</a>
+        <a href="{{ path('app_home_admin') }}"class="btn btn-primary btn-custom" style="width:200px;  white-space: nowrap; float: right; "><i class="fas fa-arrow-right"></i> Dashboard</a>
+
+          
+
+
+    
+{% endblock %}
+
+ 

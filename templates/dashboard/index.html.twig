@@ -1,0 +1,163 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+    
+  
+
+    
+    <div class="col-md-10 mx-auto">
+        <div class="card text-center">
+            <div class="card-body">
+                <h2>Durée des moyennes des missions par véhicule</h2>
+    <canvas id="bar-chart"></canvas>
+     </div>
+        </div>
+    </div>
+    <br>
+    <div class="col-md-10 mx-auto">
+        <div class="card text-center">
+            <div class="card-body">
+            <h2> Missions Intra_Urbain et Inter_Urbain</h2>
+     <canvas id="myChart"></canvas>
+        </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="col-md-10 mx-auto">
+        <div class="card text-center">
+            <div class="card-body">
+            <h2> Pourcentage des véhicules en état d'entretien</h2>
+            <canvas id="pie-chart"></canvas>
+                 </div>
+        </div>
+    </div>
+     {% block js %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var ctx = document.getElementById('bar-chart').getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            {% for matricule, _ in dureesCoursList %}
+                                "{{ matricule }}",
+                            {% endfor %}
+                        ],
+                        datasets: [{
+                            label: 'Durée (en minutes)',
+                            data: [
+                                {% for _, duree in dureesCoursList %}
+                                    {{ duree }},
+                                {% endfor %}
+                            ],
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            xAxes: [{
+                                stacked: true
+                            }],
+                            yAxes: [{
+                                stacked: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        },
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Durée des moyennes des missions par véhicule'
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var ctx = document.getElementById('pie-chart');
+  if (ctx) {
+    var data = {
+      labels: ['{{ nbVehicules[0].resEntretien }}', '{{ nbVehicules[1].resEntretien }}'],
+      datasets: [{
+        data: [
+          {{ nbVehicules[0].nbVehicules }},
+          {{ nbVehicules[1].nbVehicules }}
+        ],
+        backgroundColor: [
+          'rgba(255, 0, 100, 0.5)',
+          'rgba(54, 162, 235, 0.5)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 0.5)'
+        ],
+        borderWidth: 1
+      }]
+    };
+    var chart = new Chart(ctx, {
+      type: 'pie',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Pourcentage des véhicules en bon et passable état d\'entretien',
+
+          },
+          legend: {
+            position: 'bottom',
+            labels: {
+              boxWidth: 20
+            }
+          }
+        }
+      }
+    });
+  }
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    'Total des missions',
+                'Inter-Urbain',
+                'Intra-Urbain'
+                ],
+                datasets: [{
+                    data: [
+                         {{ nbdesc[0].totalMissions }},
+                        {{ nbdesc[0].interurbainMissions }},
+                        {{ nbdesc[0].intraurbainMissions }}
+                    ],
+                    backgroundColor: ['#E8A09A', '#FBE29F', '#C6D68F'],
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Statistiques des missions'
+                }
+            }
+        });
+                });
+
+    </script>
+    {% endblock %}
+{% endblock %}

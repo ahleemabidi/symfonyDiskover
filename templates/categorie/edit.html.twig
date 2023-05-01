@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une Categorie{% endblock %}
+
+{% block body %}
+  <div class="container">
+  
+    <div class="d-flex justify-content-between">
+          <a href="{{ path('app_categorie_index') }}" class="btn btn-primary btn-custom " style="width:200px;  white-space: nowrap; "><i class="fas fa-arrow-left"></i> Liste des Categories</a>
+           {{ include('categorie/_delete_form.html.twig') }}
+</div>
+        <div class="row">
+    <h1 class="text-center">Modifier une Categorie</h1>
+
+    
+   <div class="mx-auto col-md-4  justify-content-between">
+ 
+    {{ include('categorie/_form.html.twig', {'button_label': 'Update','attr': {'class': 'btn btn-primary btn-custom'}}) }}
+        
+      
+        
+    </div>
+     </div>
+      
+    </div>
+{% endblock %}

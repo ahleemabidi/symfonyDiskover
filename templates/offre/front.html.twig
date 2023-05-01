@@ -1,0 +1,21 @@
+{% extends 'front2.html.twig' %}
+
+{% block title %}Nos Offres {% endblock %}
+{% block body %}
+
+    <div class="item">
+        <div class="car-wrap rounded ftco-animate">
+            <div class="img rounded d-flex align-items-end" style="background-image: url({{ asset('front/images/car-1.jpg') }});">
+            </div>
+            <div class="text">
+                <h2 class="mb-0"><a href="#"></a></h2>
+                <div class="d-flex mb-3">
+                    <span >{{ offre.description }}</span>
+                    <p class="price ml-auto">{{ offre.dureeO }} <span>day</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

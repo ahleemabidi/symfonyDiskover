@@ -1,0 +1,13 @@
+{% extends 'pricing.html.twig' %}
+
+{% block title %}Edit Formulairer{% endblock %}
+
+{% block body %}
+    <h1>Edit Formulairer</h1>
+
+    {{ include('formulairer/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_formulairer_index') }}">back to list</a>
+
+    {{ include('formulairer/_delete_form.html.twig') }}
+{% endblock %}

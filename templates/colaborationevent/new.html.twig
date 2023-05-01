@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Event{% endblock %}
+
+
+
+
+{% block body %}
+    <div class="reservation-form">
+        <h1>Create new Event</h1>
+
+        {{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+
+        <section>
+            <div class="row">
+                <div class="col-md-4">
+                    <h2>Make your trip</h2>
+                    <div class="form-group">
+                        {{ form_label(form.nomevent,"Nom Event") }}
+                        {{ form_widget(form.nomevent, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.nomevent) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.dateevent,"Date Event") }}
+                        {{ form_widget(form.dateevent, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.dateevent) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.adresseevent,"Adresse Event") }}
+                        {{ form_widget(form.adresseevent, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.adresseevent) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.nbrplacevehicule,"N°Places ") }}
+                        {{ form_widget(form.nbrplacevehicule, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.nbrplacevehicule) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.prixvehiculeevent,"Prix") }}
+                        {{ form_widget(form.prixvehiculeevent, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.prixvehiculeevent) }}
+                    </div>
+
+                    <div class="form-group">
+                        
+                        {{ include('colaborationevent/_form.html.twig', {'button_label': 'Save' }) }}
+
+						 <a href="{{ path('display_colab') }}"class="btn btn-secondary">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {{ form_end(form) }}
+
+        
+    </div>
+{% endblock %}

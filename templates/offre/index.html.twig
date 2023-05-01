@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Offre index{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Load Flashy default JavaScript -->
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    <!-- Include Flashy default partial -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <div style="display: flex; justify-content: space-between;">
+    <h1>Offre </h1>
+</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>DureeO</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for offre in offres %}
+            <tr>
+                <td>{{ offre.description }}</td>
+                <td>{{ offre.dureeO }}</td>
+                <td>
+                    <a href="{{ path('app_offre_edit', {'id': offre.id}) }}"class="btn btn-primary"style="background-color: #19B151;border-color: #19B151;"><i class="fas fa-pencil-alt"></i></a>
+                    <a href="{{ path('app_promotion_new', {'id': offre.id}) }}" class="btn btn-primary"style="background-color: #3330FF;border-color: #3330FF;">Affecter Promotion</a>
+                    <a href="{{ path('app_offre_show', {'id': offre.id}) }}" " class="btn btn-primary"style="background-color: #3330FF;border-color: #3330FF;"><i class="far fa-eye"></i></a> 
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {{ knp_pagination_render(offres) }}
+    {# {% set flashyOptions = { 'position': 'bottom', 'important': true } %}
+    {{ include('@MercurySeriesFlashy/flashy.html.twig', flashyOptions) }} #}
+    <a href="{{ path('app_offre_new') }}" class="btn btn-primary"style="background-color: #DA2D25;border-color: #DA2D25;"><i class="fas fa-plus"></i>Ajouter</a>
+{% endblock %}

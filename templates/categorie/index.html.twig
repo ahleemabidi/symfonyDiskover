@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie index{% endblock %}
+
+{% block body %}
+  
+<div style="display: flex; justify-content: space-between;">
+    <h1>Categories des vehicules</h1>
+        <a href="{{ path('app_categorie_new') }}" class="btn btn-primary btn-custom" style="background-color: #BB0B0B;border-color: #BB0B0B;width: 80px;"><i class="fas fa-plus"></i>  Ajout</a>
+</div>
+        <input type="text" id="search" class="form-control" placeholder="Search">
+            <table id="t" class="table">
+        <thead>
+            <tr>
+                <th>IdCategorie</th>
+                <th>Type</th>
+                <th>Matricule</th>
+                <th>Marque</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody id="all">
+        {% for categorie in categories %}
+            <tr>
+                <td>{{ categorie.idCategorie }}</td>
+                <td>{{ categorie.type }}</td>
+                <td>{{ categorie.matricule }}</td>
+                <td>{{ categorie.marque }}</td>
+                <td>
+                    <a href="{{ path('app_categorie_show', {'idCategorie': categorie.idCategorie}) }}" class="btn btn-primary"><i class="far fa-eye"></i></a>
+                    <a href="{{ path('app_categorie_edit', {'idCategorie': categorie.idCategorie}) }}" class="btn btn-primary" style="background-color: #FF8C00;border-color: #FF8C00;" ><i class="fas fa-pencil-alt"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        
+        </tbody>
+        <tbody id="searchtab">
+        </tbody>
+    </table>
+{% do categories.setPageRange(2) %}
+    {{ knp_pagination_render(categories, 'pagination.html.twig')}}
+
+{% endblock %}
+{% block js %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+$(document).ready(function() {
+    $("#search").keyup(function(e) {
+        var value = $(this).val();
+        $.ajax({
+            url: "{{ path('searchM') }}",
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                'searchValue': value
+            },
+            success: function(response) {
+                if (Array.isArray(response)) {
+                    $('#t tbody#searchtab').empty();
+                    if (response.length > 0) {
+                        $('#t tbody#all').hide();
+                        var rows = $.map(response, function(item) {
+                            return '<tr><td>' + item.idCategorie + '</td><td>' + item.type + '</td><td>' + item.matricule + '</td><td>' + item.marque + '</td><td><a href="/' + item.idCategorie + '/edit">modifier</a> </br><a href="/' + item.idCategorie + '">supprimer</a></td></tr>';
+                        });
+                        $('#t tbody#searchtab').append(rows.join(''));
+                        $('#t tbody#searchtab').fadeIn('fast');
+                    } else {
+                        $('#t tbody#all').show();
+                    }
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    });
+});
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Promotion{% endblock %}
+
+{% block body %}
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-secondary rounded-top p-4">
+            <div class="row">
+                <h6 class="mb-4">Ajouter une Nouvelle Promotion</h6>
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                <div class="mb-3">
+                    Nom:
+                    {{ form_widget(form.nomP, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.nomP) }}
+                </div>
+                <div class="mb-3">
+                    Duree:
+                    {{ form_widget(form.DureeP, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.DureeP) }}
+                </div>
+                <div class="mb-3">
+                    Prix Avant :
+                    {{ form_widget(form.PrixAvant, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.PrixAvant) }}
+                </div>
+
+                <div class="mb-3">
+                    Prix Aprés :
+                    {{ form_widget(form.PrixApres, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.PrixApres) }}
+                </div>
+
+                <button type="submit" class="btn btn-outline-primary w-100 m-2" formnovalidate>Créer</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

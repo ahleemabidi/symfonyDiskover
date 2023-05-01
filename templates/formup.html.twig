@@ -62,33 +62,33 @@
                     <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
                     <p class="text-center small">Enter your personal details to create account</p>
                   </div>
-{{ form_start(UpdateformType, {attr: {novalidate: 'novalidate'}}) }}
+{{ form_start(UpdateForm, {attr: {novalidate: 'novalidate'}}) }}
 
  <div class="col-12">
 
 
-    <label for="{{ UpdateformType.nom.vars.id }}" class="form-label">name</label>
-     {{ form_widget(UpdateformType.nom,{'attr':{'class':'form-control'}}) }}
-                 {{form_errors(UpdateformType.nom) }}
+    <label for="{{ UpdateForm.nom.vars.id }}" class="form-label">name</label>
+     {{ form_widget(UpdateForm.nom,{'attr':{'class':'form-control'}}) }}
+                 {{form_errors(UpdateForm.nom) }}
 
         <div class="invalid-feedback">Please, enter your name!</div>
             </div>
 
 
         <div class="col-12">
-         <label for="{{ UpdateformType.prenom.vars.id }}" class="form-label">first name</label>
-          {{ form_widget(UpdateformType.prenom,{'attr':{'class':'form-control'}}) }}
-                         {{form_errors(UpdateformType.prenom) }}
+         <label for="{{ UpdateForm.prenom.vars.id }}" class="form-label">first name</label>
+          {{ form_widget(UpdateForm.prenom,{'attr':{'class':'form-control'}}) }}
+                         {{form_errors(UpdateForm.prenom) }}
 
             <div class="invalid-feedback">Please, enter your first name!</div>
                     </div>
 
 <div class="col-12">
-    <label for="{{ UpdateformType.email.vars.id }}" class="form-label">Email</label>
+    <label for="{{ UpdateForm.email.vars.id }}" class="form-label">Email</label>
     <div class="input-group has-validation">
         <span class="input-group-text" id="inputGroupPrepend">@</span>
-        {{ form_widget(UpdateformType.email, {attr: {'class': 'form-control'}}) }}
-        {{ form_errors(UpdateformType.email) }}
+        {{ form_widget(UpdateForm.email, {attr: {'class': 'form-control'}}) }}
+        {{ form_errors(UpdateForm.email) }}
         <div class="invalid-feedback">Please choose an email.</div>
     </div>
 </div>
@@ -104,7 +104,7 @@
     <p class="small mb-0">Already have an account? <a href="{{ path('app_login') }}">Log in</a></p>
 </div>
 
-{{ form_end(UpdateformType) }}
+{{ form_end(UpdateForm) }}
 
 
                 </div>

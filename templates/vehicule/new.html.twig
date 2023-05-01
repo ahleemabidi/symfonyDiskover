@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Vehicule{% endblock %}
+
+{% block body %}
+<div class="container">
+        <div class="row">
+    <h1 class="text-center">Ajouter un Vehicule</h1>
+     <div class="col-md-4 mx-auto">
+     {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+        {{ form_row(form.disponibilite,{ 'attr': {'class': 'form-control'} }) }}
+        {{ form_row(form.numEntretien,{ 'attr': {'class': 'form-control'} }) }}
+        {{ form_row(form.dateEntretien,{ 'attr': {'class': 'form-control'} }) }}
+        {{ form_row(form.resEntretien,{ 'attr': {'class': 'form-control'} }) }}
+        <br>
+                <div class="mx-auto col-md-2">
+        {{ form_rest(form,{ 'attr': {'class': 'btn btn-primary'} })}} {# Ajout de cette ligne pour afficher le reste des champs du formulaire #}
+      
+       </div>
+     {{ form_end(form) }}
+
+   
+ </div>
+ 
+        </div>
+         <div class="col-md-4 offset-md-10 text-right ">
+
+   {# {{ include('vehicule/_form.html.twig') }}#} 
+
+    <a href="{{ path('app_vehicule_index') }}" class="btn btn-primary"><i class="far fa-eye"></i>     Show Véhicules</a>
+     </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Hello EssaiController!{% endblock %}
+
+{% block body %}
+
+  <canvas id="monGraph" width="400" height="100" style="max-width: 1000px;max-height:600px;margin-left: 10%;"  ></canvas>
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.1/dist/chart.min.js" integrity="sha256-lISRn4x2bHaafBiAb0H5C7mqJli7N0SH+vrapxjIz3k=" crossorigin="anonymous"></script>
+                        <script>
+                            let ctx = document.querySelector("#monGraph")
+                            let graph = new Chart(ctx, {
+                                type: "doughnut",
+                                data: {
+                                    labels: ['Intra_Urbain','Inter_Urbain'],
+                                    datasets: [{
+                                        label: 'Missions',
+                                        data: {{ nbr|raw }},
+                                        backgroundColor: ['#D63384', '#6f42c1']
+                                    }]
+                                },
+
+                            })
+
+                        </script>
+
+
+
+
+                    </div>
+                
+{% endblock %}

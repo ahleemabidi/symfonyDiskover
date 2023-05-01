@@ -1,0 +1,62 @@
+{% extends 'car.html.twig' %}
+
+{% block title %}Hello VehiculefrontController!{% endblock %}
+
+{% block body %}
+<br>
+<div style="display: flex; justify-content: center;">
+  <form action="{{ path('app_vehicule_search') }}" method="GET">
+    <div style="display: inline-block; vertical-align: top; margin-right: 30px;">
+      <label for="type">Type:</label>
+      <select name="type" id="type">
+        <option value="moyenne">Moyenne Gamme</option>
+        <option value="haute">Haute Gamme</option>
+      </select>
+    </div>
+    <div style="display: inline-block; vertical-align: top;">
+      <label for="marque">Marque:</label>
+      <select name="marque" id="marque">
+        <option value="Peugoet">Peugoet</option>
+        <option value="Toyota">Toyota</option>
+        <option value="Ford">Ford</option>
+        <option value="Suzuki">Suzuki</option>
+        <option value="Fiat">Fiat</option>
+        <option value="VolkesWagen">VolkesWagen</option>
+        <option value="Kia">Kia</option>
+        <option value="Hyundai">Hyundai</option>
+      </select>
+    </div>
+    <div style="display: inline-block; vertical-align: top; margin-left: 30px;">
+      <button type="submit" class="btn btn-primary btn-custom">Search</button>
+    </div>
+  </form>
+</div>
+<section class="ftco-section bg-light">
+  <div class="container">
+    {% for categorie in categories %}
+      {% if loop.index % 3 == 1 %}
+        <div class="row">
+      {% endif %}
+      <div class="col-md-4">
+        <div class="car-wrap rounded ftco-animate">
+          <div class="img rounded d-flex align-items-end" style="background-image: url(images/{{ categorie.marque|lower }}.png);">
+          </div>
+          <div class="text">
+            <h2 class="mb-0"><a href="car-single.html">{{ categorie.marque }}</a></h2>
+            <div class="d-flex mb-3">
+              <span class="cat">{{ categorie.matricule }}</span>
+              <p class="price ml-auto"> <span>{{ categorie.type }}</span></p>
+            </div>
+            <p class="d-flex mb-0 d-block"> <a href="car-single.html" class="btn btn-secondary py-2 ml-1">Réserver</a></p>
+          </div>
+        </div>
+      </div>
+      {% if loop.index % 3 == 0 or loop.last %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
+
+

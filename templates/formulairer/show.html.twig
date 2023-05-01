@@ -1,0 +1,110 @@
+{% extends 'pricing.html.twig' %}
+
+{% block title %}Formulairer{% endblock %}
+
+{% block body %}
+    <h1>Formulairer</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ formulairer.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ formulairer.nom }}</td>
+            </tr>
+            <tr>
+                <th>Tlp</th>
+                <td>{{ formulairer.tlp }}</td>
+            </tr>
+            <tr>
+                <th>Mail</th>
+                <td>{{ formulairer.mail }}</td>
+            </tr>
+            <tr>
+                <th>Nbr</th>
+                <td>{{ formulairer.nbr }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ formulairer.type }}</td>
+            </tr>
+            <tr>
+                <th>Categ</th>
+                <td>{{ formulairer.categ }}</td>
+            </tr>
+            <tr>
+                <th>Depart</th>
+                <td>{{ formulairer.depart }}</td>
+            </tr>
+            <tr>
+                <th>Destination</th>
+                <td>{{ formulairer.destination }}</td>
+            </tr>
+            <tr>
+                <th>Opt</th>
+                <td>{{ formulairer.opt }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <h1>Lieu de depart</h1>
+
+
+
+    <div class="tg-player-description tg-haslayout">
+        <div class="tg-description">
+            <div class="earth3dmap-com"><iframe id="iframemap" src="https://maps.google.com/maps?q={{ formulairer.depart }}&amp;ie=UTF8&amp;iwloc=&amp;output=embed" width="100%" height="500" frameborder="0" scrolling="no"></iframe><div style="color: #333; font-size: 14px; font-family: Arial, Helvetica, sans-serif; text-align: right; padding: 10px;"> <a style="color: #333; text-decoration: underline; font-size: 14px; font-family: Arial, Helvetica, sans-serif; text-align: right;" href="http://earth3dmap.com/?from=embed" target="_blank" ></a></div>
+            </div>
+
+</div>
+</div>
+</div>
+
+
+<br><br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+<h1>Lieu de destination</h1>
+
+    <div class="tg-player-description tg-haslayout">
+        <div class="tg-description">
+            <div class="earth3dmap-com"><iframe id="iframemap" src="https://maps.google.com/maps?q={{ formulairer.destination }}&amp;ie=UTF8&amp;iwloc=&amp;output=embed" width="100%" height="500" frameborder="0" scrolling="no"></iframe><div style="color: #333; font-size: 14px; font-family: Arial, Helvetica, sans-serif; text-align: right; padding: 10px;"> <a style="color: #333; text-decoration: underline; font-size: 14px; font-family: Arial, Helvetica, sans-serif; text-align: right;" href="http://earth3dmap.com/?from=embed" target="_blank" ></a></div>
+            </div>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="{{ path('app_formulairer_index') }}">back to list</a>
+
+    <a href="{{ path('app_formulairer_edit', {'id': formulairer.id}) }}">edit</a>
+    <a href="{{ path('app_facturer_new') }}">confirmer</a>
+
+    {{ include('formulairer/_delete_form.html.twig') }}
+{% endblock %}

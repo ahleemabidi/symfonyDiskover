@@ -1,0 +1,32 @@
+{% extends 'matricule.html.twig' %}
+
+
+
+{% block body %}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="form-container" >
+          <div class="services text-center">
+            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-rent"></span></div>
+            <div class="text">
+    <h1>Veuillez saisir la matricule de votre véhicule</h1>
+      </div>
+          </div>
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+        {{ form_row(form.matricule,{ 'attr': {'class': 'form-control'} }) }}
+          <div class="text-center">
+<button type="submit" class="btn btn-primary btn-custom" style="width:200px;  white-space: nowrap;"><i class="fas fa-arrow-left"></i> Valider</button>
+              </div>
+
+    {{ form_end(form) }}
+    <br>
+    <div class="text-center">
+    <a href="{{ path('app_chauffeur_index') }}?matricule={{ form.vars.value.matricule }}" class="btn btn-primary btn-custom" style="width:200px;  white-space: nowrap;"><i class="fas fa-arrow-left"></i> Show</a>
+</div>
+     </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

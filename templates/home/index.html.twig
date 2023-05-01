@@ -1,0 +1,338 @@
+ {% extends 'back.html.twig' %}
+ {% block body %}
+ <h1>Dashboard</h1>
+ <br>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="rounded-circle bg-info text-white d-flex justify-content-center align-items-center" style="width: 100px; height: 100px;">
+                        <h2>{{ nbMatricules }}</h2>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <h5>Nombre de véhicules</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="rounded-circle bg-warning text-white d-flex justify-content-center align-items-center" style="width: 100px; height: 100px;">
+                        <h2>{{ nbMissions }}</h2>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <h5>Nombre de missions effectuées</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="rounded-circle bg-danger text-white d-flex justify-content-center align-items-center" style="width: 100px; height: 100px;">
+                        <h2>{{ nbdispo }}</h2>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <h5>Véhicules en trajets</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+     <div class="row">
+     <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2>Durée des moyennes des missions par véhicule</h2>
+    <canvas id="bar-chart"></canvas>
+     </div>
+        </div>
+    </div>
+     
+    
+    <div class="col-md-6">
+        <div class="card text-center">
+            <div class="card-body">
+            <h2> Missions Intra_Urbain et Inter_Urbain</h2>
+            <canvas id="monGraph" width="100" height="100" style="max-width: 500px;max-height:300px;margin-left: 10%;"  ></canvas>
+            </div>
+        </div>
+    </div>
+        </div>
+
+    <div class="col-md-6 mx-auto">
+        <div class="card text-center">
+            <div class="card-body">
+            <h2> Pourcentage des véhicules en état d'entretien</h2>
+            <canvas id="pie-chart" style="max-width: 500px;max-height:300px;margin-left: 10%;" ></canvas>
+                 </div>
+        </div>
+    </div>
+
+    
+    {# <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+            <h2> Missions Intra_Urbain et Inter_Urbain</h2>
+     <canvas id="myChart"></canvas>
+        </div>
+        </div>
+    </div>
+        </div> #}
+        
+
+   
+
+
+ <h1 >Liste des Categories</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdCategorie</th>
+                <th>Type</th>
+                <th>Matricule</th>
+                <th>Marque</th>
+                 <th>Actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie in categories %}
+            <tr>
+                <td>{{ categorie.idCategorie }}</td>
+                <td>{{ categorie.type }}</td>
+                <td>{{ categorie.matricule }}</td>
+                <td>{{ categorie.marque }}</td>
+                <td>                    <a href="{{ path('app_categorie_show', {'idCategorie': categorie.idCategorie}) }}" class="btn btn-primary"><i class="far fa-eye"></i></a>
+</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        
+        </tbody>
+    </table>
+   <h1 >Liste des Vehicules</h1>
+   <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Disponibilite</th>
+                <th>NumEntretien</th>
+                <th>DateEntretien</th>
+                <th>ResEntretien</th>
+                                 <th>Actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for vehicule in vehicules %}
+            <tr>
+                <td>{{ vehicule.id }}</td>
+                <td>{{ vehicule.disponibilite }}</td>
+                <td>{{ vehicule.numEntretien }}</td>
+                <td>{{ vehicule.dateEntretien|date('d-m-Y') }}</td>
+                <td>{{ vehicule.resEntretien }}</td>
+                <td>                    <a href="{{ path('app_vehicule_show', {'id': vehicule.id}) }}" class="btn btn-primary"><i class="far fa-eye"></i></a>
+</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+   <h1>Liste des Missions</h1>
+   <table class="table">
+        <thead>
+            <tr>
+                <th>IdMission</th>
+                <th>Matricule</th>
+                <th>Description</th>
+                <th>HeureDebut</th>
+                <th>HeureFin</th>
+                                 <th>Actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for mission in missions %}
+            <tr>
+                <td>{{ mission.idMission }}</td>
+                <td>{{ mission.matricule }}</td>
+                <td>{{ mission.description }}</td>
+                <td>{{ mission.heureDebut|date('d-m-Y H:i') }}</td>
+                <td>{{ mission.heureFin|date('d-m-Y H:i')  }}</td>
+                <td>                    <a href="{{ path('app_mission_show', {'idMission': mission.idMission}) }}" class="btn btn-primary"><i class="far fa-eye"></i></a>
+</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        
+        </tbody>
+    </table>
+
+
+    {% block js %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var ctx = document.getElementById('bar-chart').getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            {% for matricule, _ in dureesCoursList %}
+                                "{{ matricule }}",
+                            {% endfor %}
+                        ],
+                        datasets: [{
+                            label: 'Durée (en minutes)',
+                            data: [
+                                {% for _, duree in dureesCoursList %}
+                                    {{ duree }},
+                                {% endfor %}
+                            ],
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            xAxes: [{
+                                stacked: true
+                            }],
+                            yAxes: [{
+                                stacked: true,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        },
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Durée des moyennes des missions par véhicule'
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var ctx = document.getElementById('pie-chart');
+  if (ctx) {
+    var data = {
+      labels: ['{{ nbVehicules[0].resEntretien }}', '{{ nbVehicules[1].resEntretien }}'],
+      datasets: [{
+        data: [
+          {{ nbVehicules[0].nbVehicules }},
+          {{ nbVehicules[1].nbVehicules }}
+        ],
+        backgroundColor: [
+          'rgba(255, 0, 100, 0.5)',
+          'rgba(54, 162, 235, 0.5)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 0.5)'
+        ],
+        borderWidth: 1
+      }]
+    };
+    var chart = new Chart(ctx, {
+      type: 'pie',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Pourcentage des véhicules en bon et passable état d\'entretien',
+
+          },
+          legend: {
+            position: 'bottom',
+            labels: {
+              boxWidth: 20
+            }
+          }
+        }
+      }
+    });
+  }
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    'Total des missions',
+                'Inter-Urbain',
+                'Intra-Urbain'
+                ],
+                datasets: [{
+                    data: [
+                         {{ nbdesc[0].totalMissions }},
+                        {{ nbdesc[0].interurbainMissions }},
+                        {{ nbdesc[0].intraurbainMissions }}
+                    ],
+                    backgroundColor: ['#E8A09A', '#FBE29F', '#C6D68F'],
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Statistiques des missions'
+                }
+            }
+        });
+                });
+
+    </script>
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.1/dist/chart.min.js" integrity="sha256-lISRn4x2bHaafBiAb0H5C7mqJli7N0SH+vrapxjIz3k=" crossorigin="anonymous"></script>
+                        <script>
+                            let ctx = document.querySelector("#monGraph")
+                            let graph = new Chart(ctx, {
+                                type: "doughnut",
+                                data: {
+                                    labels: ['Intra_Urbain','Inter_Urbain'],
+                                    datasets: [{
+                                        label: 'Missions',
+                                        data: {{ nbr|raw }},
+                                        backgroundColor: ['#E8A09A', '#C6D68F']
+                                    }]
+                                },
+
+                            })
+
+                        </script>
+    {% endblock %}
+
+          
+    {% endblock %}
+ 

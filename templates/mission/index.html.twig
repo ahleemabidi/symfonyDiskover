@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mission index{% endblock %}
+
+{% block body %}
+<div style="display: flex; justify-content: space-between;">
+    <h1>Liste des Missions</h1>
+    <a href="{{ path('app_mission_new') }}" class="btn btn-primary btn-custom" style="background-color: #BB0B0B;border-color: #BB0B0B;width: 80px;"><i class="fas fa-plus"></i>  Ajout</a>
+</div>
+        <input type="text" id="search" class="form-control" placeholder="Search">
+    <table id="t" class="table">
+        <thead>
+            <tr>
+                <th>IdMission</th>
+                <th>Matricule</th>
+                <th>Description</th>
+                <th>HeureDebut</th>
+                <th>HeureFin</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody id="all">
+        {% for mission in missions %}
+            <tr>
+                <td>{{ mission.idMission }}</td>
+                <td>{{ mission.matricule }}</td>
+                <td>{{ mission.description }}</td>
+                <td>{{ mission.heureDebut|date('d-m-Y H:i') }}</td>
+                <td>{{ mission.heureFin|date('d-m-Y H:i')  }}</td>
+                <td>
+                    <a href="{{ path('app_mission_show', {'idMission': mission.idMission}) }}" class="btn btn-primary"><i class="far fa-eye"></i></a>
+                    <a href="{{ path('app_mission_edit', {'idMission': mission.idMission}) }}" class="btn btn-primary" style="background-color: #FF8C00;border-color: #FF8C00;"><i class="fas fa-pencil-alt"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        
+        </tbody>
+        <tbody id="searchtab">
+        </tbody>
+    </table>
+{% do missions.setPageRange(2) %}
+    {{ knp_pagination_render(missions, 'pagination.html.twig')}}
+    
+{% endblock %}
+{% block js %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+$(document).ready(function() {
+    $("#search").keyup(function(e) {
+        var value = $(this).val();
+        $.ajax({
+            url: "{{ path('searchDescription') }}",
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                'searchValue': value
+            },
+            success: function(response) {
+                if (Array.isArray(response)) {
+                    $('#t tbody#searchtab').empty();
+                    if (response.length > 0) {
+                        $('#t tbody#all').hide();
+                        var rows = $.map(response, function(item) {
+                            return '<tr><td>' + item.idMission + '</td><td>' + item.matricule + '</td><td>' + item.description + '</td><td>' + item.heureDebut + '</td><td>' + item.heureFin + '</td><td><a href="/' + item.idMission + '/edit">modifier</a> </br><a href="/' + item.idMission + '">supprimer</a></td></tr>';
+                        });
+                        $('#t tbody#searchtab').append(rows.join(''));
+                        $('#t tbody#searchtab').fadeIn('fast');
+                    } else {
+                        $('#t tbody#all').show();
+                    }
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

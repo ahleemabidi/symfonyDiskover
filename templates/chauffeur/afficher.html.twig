@@ -1,0 +1,66 @@
+{% extends 'matricule.html.twig' %}
+
+{% block title %}Mission index{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+             <div class="text-center">
+        <h1>Vos Missions effectuées</h1>
+                    <a href="{{ path('app_chauffeur_new') }}" class="btn btn-primary btn-custom" style="background-color: #BB0B0B;border-color: #BB0B0B;width: 200px;"><i class="fas fa-plus"></i>  Ajouter une nouvelle mission</a>
+
+    </div>
+    <br>
+  
+  <form method="get" action="{{ path('app_chauffeur_search') }}">
+   
+    
+   <div style="display: flex; justify-content: center;">
+
+    <div style="display: inline-block; vertical-align: top;">
+      <label for="description">Description:</label>
+      <select name="description" id="description">
+        <option value="intra">Intra_Urbain</option>
+        <option value="inter">Inter_Urbain</option>
+      </select>
+    </div>
+  
+
+    
+    <div style="display: inline-block; vertical-align: top; margin-left: 30px">
+      <button type="submit" class="btn btn-primary btn-custom" >Search</button>
+    </div>
+        </div>
+        </div>
+
+  </form>
+  
+
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-8 offset-md-2">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>HeureDebut</th>
+                        <th>HeureFin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mission in missions %}
+                    <tr>
+                        <td>{{ mission.description }}</td>
+                        <td>{{ mission.heureDebut|date('d-m-Y H:i') }}</td>
+                        <td>{{ mission.heureFin|date('d-m-Y H:i')  }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6">no records found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

@@ -16,7 +16,7 @@ class UpdateformType extends AbstractType
             ->add('nom')
             ->add('prenom')
             
-            ->add('password')
+           
            
         ;
     }

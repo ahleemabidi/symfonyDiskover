@@ -1,0 +1,76 @@
+{% extends 'front3.html.twig' %}
+
+{% block title %}New Formulairer{% endblock %}
+
+{% block form %}
+{{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+<form action="#" class="request-form ftco-animate bg-primary">
+<br>
+<br>
+<br>
+<br><br>
+<br>
+<br>
+<br>
+    <h2>Passez votre réservation</h2>
+          <div class="form-group">
+              <label for="" class="label">Nom</label>
+              {{ form_widget(form.nom, {'attr': {'class': 'form-control','type':'text', 'placeholder': 'Saisir votre nom'}}) }}
+                                             {{ form_errors(form.nom,{ 'attr':{'class':'text-danger'}}) }}
+          </div>
+          <div class="form-group">
+              <label for="" class="label">Numéro </label>
+              {{ form_widget(form.tlp, {'attr': {'class': 'form-control','type':'text', 'placeholder': 'Enter number'}}) }}
+                                             {{ form_errors(form.tlp,{ 'attr':{'class':'text-danger'}}) }}
+          </div>
+        
+              <div class="form-group ">
+      <label for="" class="label">Mail</label>
+      {{ form_widget(form.mail, {'attr': {'class': 'form-control','type':'text', 'placeholder': 'Enter mail'}}) }}
+                                             {{ form_errors(form.mail,{ 'attr':{'class':'text-danger'}}) }}
+    </div>
+    <div class="form-group ">
+      <label for="" class="label">Catégorie </label>
+      {{ form_widget(form.categ, {'attr': {'class': 'form-control','type':'text', 'placeholder': 'Enter categ'}}) }}
+                                             {{ form_errors(form.categ,{ 'attr':{'class':'text-danger'}}) }}
+    </div>
+
+<div class="form-group">
+  <label for="" class="label">Lieu de départ</label>
+  {{ form_widget(form.depart, {'attr': {'class': 'form-control','type':'text', 'placeholder': 'Enter number'}}) }}
+                                             {{ form_errors(form.depart,{ 'attr':{'class':'text-danger'}}) }}
+</div>
+
+<div class="form-group">
+  <label for="" class="label">Destination</label>
+  {{ form_widget(form.destination, {'attr': {'class': 'form-control','type':'text', 'placeholder': 'Enter number'}}) }}
+                                             {{ form_errors(form.destination,{ 'attr':{'class':'text-danger'}}) }}
+</div>
+
+<div class="form-group">
+  <label for="" class="label">Type du trajet </label>
+  {{ form_widget(form.type, {'attr': {'class': 'form-control','type':'text', 'placeholder': 'Enter number'}}) }}
+                                             {{ form_errors(form.tlp,{ 'attr':{'class':'text-danger'}}) }}
+</div>
+
+<div class="form-group">
+  <label for="" class="label">Nombre de personne </label>
+  {{ form_widget(form.nbr, {'attr': {'class': 'form-control','type':'text', 'placeholder': 'Enter number'}}) }}
+                                             {{ form_errors(form.nbr,{ 'attr':{'class':'text-danger'}}) }}
+</div>
+
+<div class="form-group">
+  <label for="" class="label">Option</label>
+  
+  {{ form_widget(form.opt, {'attr': {'class': 'form-control','type':'text', 'placeholder': 'Enter number'}}) }}
+                                             {{ form_errors(form.opt,{ 'attr':{'class':'text-danger'}}) }}
+</div>
+
+  <div class="form-group">
+    {{ form_widget(form) }}
+  </div>
+      </form>
+      {{ form_end(form) }}
+
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'back3.html.twig' %}
+
+{% block title %}Formulairer index{% endblock %}
+
+{% block body %}
+    <h1>Formulairer index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Tlp</th>
+                <th>Mail</th>
+                <th>Nbr</th>
+                <th>Type</th>
+                <th>Categ</th>
+                <th>Depart</th>
+                <th>Destination</th>
+                <th>Opt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for formulairer in formulairers %}
+            <tr>
+                <td>{{ formulairer.id }}</td>
+                <td>{{ formulairer.nom }}</td>
+                <td>{{ formulairer.tlp }}</td>
+                <td>{{ formulairer.mail }}</td>
+                <td>{{ formulairer.nbr }}</td>
+                <td>{{ formulairer.type }}</td>
+                <td>{{ formulairer.categ }}</td>
+                <td>{{ formulairer.depart }}</td>
+                <td>{{ formulairer.destination }}</td>
+                <td>{{ formulairer.opt }}</td>
+                <td>
+                    <a href="{{ path('app_formulairer_show', {'id': formulairer.id}) }}">show</a>
+                    <a href="{{ path('app_formulairer_edit', {'id': formulairer.id}) }}">edit</a>
+                    <a href="{{ path('app_formulairer_delete', {'id': formulairer.id}) }}">delete</a>
+                    
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_formulairer_new') }}">Create new</a>
+    {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+
+{% endblock %}
+
+
+

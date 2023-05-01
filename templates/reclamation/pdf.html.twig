@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des réclamations</title>
+    <link rel="stylesheet" href="{{ asset('../../Back/css/styles.css') }}">
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            color: #0077be;
+        }
+        h2 {
+            text-align: center;
+            margin-top: 50px;
+            color: #0077be;
+        }
+        table {
+            margin: 50px auto;
+            border-collapse: collapse;
+            width: 80%;
+            color: #0077be;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #0077be;
+            font-size: 18px;
+            color: #fff;
+        }
+        td {
+            background-color: #e0f2f1;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #fff;
+            background-color: #43a047;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        a:hover {
+            background-color: #357a38;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenue dans votre application Diskover</h1>
+    <h2>Voila la liste de tout les reclamations en attentes</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>cin</th>
+                <th>type</th>
+                <th>objet</th>
+                <th>message</th>
+                <th>date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in reclamations %}
+            <tr>
+                <td>{{a.id }}</td>
+                <td>{{a.cin }}</td>
+                <td>{{a.type}}</td>
+                <td>{{a.objet}}</td>
+                <td>{{a.message }}</td>
+                <td>{{a.date.format('j-m-y')}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

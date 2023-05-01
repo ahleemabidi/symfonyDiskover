@@ -1,0 +1,45 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Colaborationevent{% endblock %}
+
+{% block body %}
+<br><br><br><br>
+    <h1>Colaborationevent</h1>
+
+    <table class="table">
+        <tbody>
+            
+            <tr>
+                <th>Nomevent</th>
+                <td>{{ colaborationevent.nomevent }}</td>
+            </tr>
+            <tr>
+                <th>Date Event</th>
+                <td>{{ colaborationevent.dateevent ? colaborationevent.dateevent|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Adresse Event</th>
+                <td>{{ colaborationevent.adresseevent }}</td>
+            </tr>
+            <tr>
+                <th>N° Places</th>
+                <td>{{ colaborationevent.nbrplacevehicule }}</td>
+            </tr>
+            <tr>
+                <th>Prix </th>
+                <td>{{ colaborationevent.prixvehiculeevent }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_colaborationevent_index') }}"class="btn btn-secondary">back to list</a>
+
+    {#<a href="{{ path('app_colaborationevent_edit', {'idevent': colaborationevent.idevent}) }}"class="btn btn-secondary">edit</a>#}
+    
+    <p><a href="{{ path('app_evenement_map', {'idevent': colaborationevent.idevent}) }}">
+			<span class="badge bg-warning">voir dans la map</span>
+		</a>
+	</p>
+
+    {{ include('colaborationevent/_delete_form.html.twig') }}
+{% endblock %}
